@@ -14,6 +14,13 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class VisiteRepository extends ServiceEntityRepository
 {
+     public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Visite::class);
+    }
+    
+    
+    
     public function findAllOrderBy($champ, $ordre): array{
         return $this->createQueryBuilder('v')
                 ->orderBy('v.'.$champ, $ordre)
@@ -22,11 +29,21 @@ class VisiteRepository extends ServiceEntityRepository
         
     }
     
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, Visite::class);
+    public function findByEqualValue($champ, $valeur): array{
+        if($valeur==""){
+            return $this->createQueryBuilder('v')//Alias de la table
+                ->orderBy('v.'.$champ, 'ASC')
+                ->getQuery()
+                ->getResult();            
+        }else{
+            return $this->createQueryBuilder('v')//Alias de la table
+                ->where('v.'.$champ.'=:valeur')
+                ->setParameter('valeur', $valeur)
+                ->orderBy('v.datecreation', 'DESC')
+                ->getQuery()
+                ->getResult();    
+        }
     }
-
     //    /**
     //     * @return Visite[] Returns an array of Visite objects
     //     */
