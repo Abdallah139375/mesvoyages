@@ -2,9 +2,11 @@
 
 namespace App\Form;
 
+use App\Entity\Environnement;
 use App\Entity\Visite;
 use DateTime;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,7 +22,13 @@ class VisiteType extends AbstractType
             ->add('datecreation', null, [
                 'widget' => 'single_text',
                 'label' => 'date'
-            ])     
+            ])
+            ->add('environnements', EntityType::class, [
+                'class' => Environnement::class,
+                'choice_label' => 'nom',
+                'multiple' => true,
+                'required' => false
+            ]) 
             ->add('note')
             ->add('avis')
             ->add('tempmin', null, [
