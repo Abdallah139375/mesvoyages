@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Environnement;
 use App\Entity\Visite;
 use DateTime;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -29,6 +30,10 @@ class VisiteType extends AbstractType
                 'multiple' => true,
                 'required' => false
             ]) 
+            ->add('imageFile', FileType::class, [
+                'required' => false,
+                'label' => 'sélection image'
+            ])
             ->add('note')
             ->add('avis')
             ->add('tempmin', null, [
