@@ -8,6 +8,7 @@
 namespace App\Tests;
 
 use PHPUnit\Framework\TestCase;
+use App\Entity\Visite;
 
 /**
  * Description of VisiteTest
@@ -16,9 +17,9 @@ use PHPUnit\Framework\TestCase;
  */
 class VisiteTest extends TestCase{
     
-    public function testGetDatecreationString(){
+     public function testGetDatecreationString(){
         $visite = new Visite();
-        $visite->setDatecreation(new \DateTime("20244-04-24"));
-        $visite->assertEquals("24/04/2024", $visite->getDatecreationString());
+        $visite->setDatecreation(new \DateTime("2024-04-24"));
+        $this->assertEquals("24/04/2024", $visite->getDatecreationString());
     }
 }

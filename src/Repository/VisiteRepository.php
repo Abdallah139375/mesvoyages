@@ -56,6 +56,15 @@ class VisiteRepository extends ServiceEntityRepository
                 ->getResult();    
         }
     }
+        
+        public function newVisite(): Visite {
+        $visite = (new Visite())
+                ->setVille("Paris")
+                ->setPays("France")
+                ->setDatecreation(new \DateTime("now"));
+        return $visite;
+    }
+    
     //    /**
     //     * @return Visite[] Returns an array of Visite objects
     //     */
